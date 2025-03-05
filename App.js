@@ -1,20 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
+import SignupScreen from './screens/Signup-Page.js';
+import LoginScreen from './screens/Login-Screen.js';
+import AttendanceDashboard from './screens/attendance-dashboard.js';
+import AttendanceSheet from './screens/Calender-Screen.js';
+import TeacherDashboard from './screens/teacher-dashboard.js';
+import EmployeesDashboard from './screens/Employees-Dashboard.js';
 
-export default function App() {
+
+const Stack = createNativeStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+    <SafeAreaProvider>
+      <StatusBar barStyle="light-content" backgroundColor="#000" />
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Login"
+          screenOptions={{
+            headerShown: false,
+            animation: 'slide_from_right',
+            contentStyle: {
+              backgroundColor: '#000',
+            },
+          }}>
+          <Stack.Screen name="Login" component={LoginScreen} />
+          <Stack.Screen name="Signup" component={SignupScreen} />
+          <Stack.Screen name="AttendanceDashboard" component={AttendanceDashboard} />
+          <Stack.Screen name="AttendanceSheet" component={AttendanceSheet} />
+          <Stack.Screen name="TeacherDashboard" component={TeacherDashboard} />
+          <Stack.Screen name="EmployeesDashboard" component={EmployeesDashboard} />
+          
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
+  );
+};
+
+export default App;
+
+
